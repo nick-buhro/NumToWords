@@ -38,8 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Russian\RussianGender.cs" />
+    <Compile Include="Russian\RussianUnitOfMeasure.cs" />
     <Compile Include="Russian\ToRussianWordsConverter.cs" />
-    <Compile Include="ToWordsConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
