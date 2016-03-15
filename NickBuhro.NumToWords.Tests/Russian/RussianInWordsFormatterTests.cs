@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NickBuhro.NumToWords.Russian;
 
-namespace NickBuhro.NumToWords.Tests
+namespace NickBuhro.NumToWords.Tests.Russian
 {
     [TestClass]
     public class RussianInWordsFormatterTests
@@ -17,12 +18,12 @@ namespace NickBuhro.NumToWords.Tests
                 new Tuple<int, string>(100, "сто")
             };
 
-            var formatter = new RussianInWordsFormatter();
+            var converter = new ToRussianWordsConverter();
 
             foreach (var testCase in testCases)
             {
-                var actual = testCase.Item1.ToString(formatter);
-                Assert.AreEqual(testCase.Item2, actual);
+                var actual = converter.ToWords(testCase.Item1);
+                Assert.AreEqual(testCase.Item2, actual, $"Invaid convertation of value {testCase.Item1}.");
             }
         }
     }
