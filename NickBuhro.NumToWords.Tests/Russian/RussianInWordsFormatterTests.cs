@@ -22,7 +22,7 @@ namespace NickBuhro.NumToWords.Tests.Russian
 
             foreach (var testCase in testCases)
             {
-                var actual = converter.ToWords(testCase.Item1, RussianGender.Masculine);
+                var actual = converter.ToWords(testCase.Item1, Gender.Masculine);
                 Assert.AreEqual(testCase.Item2, actual, $"Invaid convertation of value {testCase.Item1}.");
             }
         }

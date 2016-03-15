@@ -1,6 +1,6 @@
 ﻿namespace NickBuhro.NumToWords.Russian
 {
-    public enum RussianGender
+    public enum Gender
     {
         Masculine,
         Feminine,
