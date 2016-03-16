@@ -1,30 +1,25 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NickBuhro.NumToWords.Russian;
 
 namespace NickBuhro.NumToWords.Tests.Russian
 {
     [TestClass]
-    public class ToRussianWordsConverterTests
+    public sealed partial class ToRussianWordsConverterTests
     {
-        [TestMethod]
-        public void Int32FormatTest()
+        private void MasculineNumberTestHelper(long number, string expected)
         {
-            var testCases = new []
-            {
-                new Tuple<int, string>(1, "один"),
-                new Tuple<int, string>(0, "ноль"),
-                new Tuple<int, string>(-5, "минус пять"),
-                new Tuple<int, string>(100, "сто")
-            };
+            var c = new ToRussianWordsConverter();
 
-            var converter = new ToRussianWordsConverter();
+            var actual = c.ToWords(number, Gender.Masculine);
+            Assert.AreEqual(expected, actual);
+        }
 
-            foreach (var testCase in testCases)
-            {
-                var actual = converter.ToWords(testCase.Item1, Gender.Masculine);
-                Assert.AreEqual(testCase.Item2, actual, $"Invaid convertation of value {testCase.Item1}.");
-            }
+        private void RubleNumberTestHelper(long number, string expected)
+        {
+            var c = new ToRussianWordsConverter();
+
+            var actual = c.ToWords(number, UnitOfMeasure.Ruble);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

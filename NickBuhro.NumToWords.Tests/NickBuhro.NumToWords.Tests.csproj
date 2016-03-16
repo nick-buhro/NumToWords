@@ -50,6 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Russian\ToRussianWordsConverterTests.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToRussianWordsConverterTests.tt</DependentUpon>
+    </Compile>
+    <None Include="Russian\ToRussianWordsConverterTests.csv" />
     <Compile Include="Russian\ToRussianWordsConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +64,15 @@
       <Project>{c3cb50a8-ac08-4170-9b52-e12142e0f870}</Project>
       <Name>NickBuhro.NumToWords.Base</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Russian\ToRussianWordsConverterTests.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToRussianWordsConverterTests.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

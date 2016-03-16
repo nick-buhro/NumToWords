@@ -78,7 +78,7 @@ namespace NickBuhro.NumToWords.Russian
             }
             else
             {
-                AppendUnitOfMeasure(1, unit);
+                AppendUnitOfMeasure(5, unit);
             }
 
             // Finilize result
@@ -97,7 +97,7 @@ namespace NickBuhro.NumToWords.Russian
             Debug.Assert(value < 1000);
 
             AppendNumber(value, unit.Gender);
-            AppendUnitOfMeasure(value % 10, unit);
+            AppendUnitOfMeasure(value % 100, unit);
         }
 
         /// <summary>
@@ -150,14 +150,19 @@ namespace NickBuhro.NumToWords.Russian
         /// <summary>
         /// Append unit of measure in the correct form.
         /// </summary>
-        /// <param name="form">The last digit of the number. For number 123 it should be 3.</param>
+        /// <param name="form">The last 2 digits of the number. For number 123 it should be 23.</param>
         /// <param name="unit">Unit of measure for writing.</param>
         private void AppendUnitOfMeasure(int form, UnitOfMeasure unit)
         {
             Debug.Assert(_result != null);
             Debug.Assert(form >= 0);
-            Debug.Assert(form < 10);
+            Debug.Assert(form < 100);
 
+            if (form > 20)
+            {
+                form = form%10;
+            }
+            
             if (form >= 5)
             {
                 _result.Append(' ');
