@@ -4,7 +4,7 @@ using NickBuhro.NumToWords.Russian;
 namespace NickBuhro.NumToWords.Tests.Russian
 {
     [TestClass]
-    public sealed partial class ToRussianWordsConverterTests
+    public sealed partial class RussianConverterTests
     {
         [TestMethod]
         public void RubleKopekTest()
@@ -12,7 +12,7 @@ namespace NickBuhro.NumToWords.Tests.Russian
             var number = 123.45M;
             var expected = "сто двадцать три рубля сорок пять копеек";
 
-            var actual = RussianConverter.Format(number);
+            var actual = RussianConverter.FormatCurrency(number);
 
             Assert.AreEqual(expected, actual);
         }
@@ -22,7 +22,7 @@ namespace NickBuhro.NumToWords.Tests.Russian
 
         private void MasculineNumberTestHelper(long number, string expected)
         {
-            var actual = RussianConverter.Format(number, Gender.Masculine);
+            var actual = RussianConverter.Format(number);
             Assert.AreEqual(expected, actual);
         }
 

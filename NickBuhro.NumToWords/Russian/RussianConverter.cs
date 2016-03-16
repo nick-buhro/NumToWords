@@ -25,9 +25,9 @@ namespace NickBuhro.NumToWords.Russian
         /// </code>
         /// </example>
         /// <param name="number">Number to format.</param>
-        /// <param name="gender">Gender of unit of measure.</param>
+        /// <param name="gender">Gender of unit of measure. Default value is <see cref="Gender.Masculine"></see></param>
         /// <returns>Number in words on russian language.</returns>
-        public static string Format(long number, Gender gender)
+        public static string Format(long number, Gender gender = Gender.Masculine)
         {
             Debug.Assert((int)Gender.Masculine == 0);
             Debug.Assert((int)Gender.Feminine == 1);
@@ -62,7 +62,7 @@ namespace NickBuhro.NumToWords.Russian
         /// <param name="decimalUnit">Currency name for integer part. Default value is <see cref="UnitOfMeasure.Kopek"/>.</param>
         /// <param name="decimalDigitCount">Count of decimal digits. For RUB and USD should be 2.</param>
         /// <returns>Currency amount in words on russian language.</returns>
-        public static string Format(
+        public static string FormatCurrency(
             decimal number, 
             UnitOfMeasure integerUnit = null,
             UnitOfMeasure decimalUnit = null, 

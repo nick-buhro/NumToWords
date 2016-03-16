@@ -5,11 +5,12 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NickBuhro.NumToWords.Tests", "NickBuhro.NumToWords.Tests\NickBuhro.NumToWords.Tests.csproj", "{A8FCE48F-1AD5-4EB5-AD35-5C8EBCF52A8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NickBuhro.NumToWords.Base", "NickBuhro.NumToWords.Base\NickBuhro.NumToWords.Base.csproj", "{C3CB50A8-AC08-4170-9B52-E12142E0F870}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NickBuhro.NumToWords.Base", "NickBuhro.NumToWords\NickBuhro.NumToWords.Base.csproj", "{C3CB50A8-AC08-4170-9B52-E12142E0F870}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{14BE75DD-A27D-4965-8169-DD5E95860112}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
+		NickBuhro.NumToWords\NickBuhro.NumToWords.nuspec = NickBuhro.NumToWords\NickBuhro.NumToWords.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject

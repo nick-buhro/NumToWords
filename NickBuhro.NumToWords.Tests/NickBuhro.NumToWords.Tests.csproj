@@ -50,25 +50,25 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Russian\ToRussianWordsConverterTests.generated.cs">
+    <Compile Include="Russian\RussianConverterTests.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ToRussianWordsConverterTests.tt</DependentUpon>
+      <DependentUpon>RussianConverterTests.tt</DependentUpon>
     </Compile>
-    <None Include="Russian\ToRussianWordsConverterTests.csv" />
-    <Compile Include="Russian\ToRussianWordsConverterTests.cs" />
+    <None Include="Russian\RussianConverterTests.csv" />
+    <Compile Include="Russian\RussianConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NickBuhro.NumToWords.Base\NickBuhro.NumToWords.Base.csproj">
+    <ProjectReference Include="..\NickBuhro.NumToWords\NickBuhro.NumToWords.Base.csproj">
       <Project>{c3cb50a8-ac08-4170-9b52-e12142e0f870}</Project>
       <Name>NickBuhro.NumToWords.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Russian\ToRussianWordsConverterTests.tt">
+    <Content Include="Russian\RussianConverterTests.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ToRussianWordsConverterTests.generated.cs</LastGenOutput>
+      <LastGenOutput>RussianConverterTests.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
