@@ -10,6 +10,14 @@ namespace NickBuhro.NumToWords.Russian
     /// </summary>
     internal struct Algorithm
     {
+        private const long E3 = 1000L;
+        private const long E6 = 1000000L;
+        private const long E9 = 1000000000L;
+        private const long E12 = 1000000000000L;
+
+        public const long MaxValue = E12 - 1;
+
+
         private StringBuilder _result;
         
         /// <summary>
@@ -20,11 +28,6 @@ namespace NickBuhro.NumToWords.Russian
         /// </example>
         public string Convert(long number, UnitOfMeasure unit)
         {
-            const long e3 = 1000L;
-            const long e6 = 1000000L;
-            const long e9 = 1000000000L;
-            const long e12 = 1000000000000L;
-
             // Check for the min value that can't be represented as long positive value
             if (number == long.MinValue)
                 throw new ArgumentOutOfRangeException(nameof(number));
@@ -44,31 +47,31 @@ namespace NickBuhro.NumToWords.Russian
             }
 
             // Numbers more than 999 billions is not supported
-            if (number >= e12)
+            if (number >= E12)
                 throw new ArgumentOutOfRangeException(nameof(number));
 
             // Write billions
-            if (number >= e9)
+            if (number >= E9)
             {
-                var value = number / e9;
+                var value = number / E9;
                 Append((int)value, Constants.Е9Unit);
-                number = number % e9;
+                number = number % E9;
             }
 
             // Write millions
-            if (number >= e6)
+            if (number >= E6)
             {
-                var value = number / e6;
+                var value = number / E6;
                 Append((int)value, Constants.Е6Unit);
-                number = number % e6;
+                number = number % E6;
             }
 
             // Write thouthands
-            if (number >= e3)
+            if (number >= E3)
             {
-                var value = number / e3;
+                var value = number / E3;
                 Append((int)value, Constants.Е3Unit);
-                number = number % e3;
+                number = number % E3;
             }
 
             // Write hundreds

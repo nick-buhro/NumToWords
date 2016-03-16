@@ -42,7 +42,7 @@
     <Compile Include="Russian\Constants.cs" />
     <Compile Include="Russian\Gender.cs" />
     <Compile Include="Russian\UnitOfMeasure.cs" />
-    <Compile Include="Russian\ToRussianWordsConverter.cs" />
+    <Compile Include="Russian\RussianConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

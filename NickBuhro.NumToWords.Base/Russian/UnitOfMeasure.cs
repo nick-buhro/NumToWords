@@ -2,6 +2,10 @@
 {
     public sealed class UnitOfMeasure
     {
+        public static readonly UnitOfMeasure Ruble = new UnitOfMeasure(Gender.Masculine, "рубль", "рубля", "рублей");
+        public static readonly UnitOfMeasure Kopek = new UnitOfMeasure(Gender.Feminine, "копейка", "копейки", "копеек");
+
+
         public Gender Gender { get; }
         public string Form1 { get; }
         public string Form2 { get; }
@@ -14,15 +18,5 @@
             Form2 = form2;
             Form5 = form5;
         }
-
-
-        #region Static definitions
-        
-        
-
-        public static readonly UnitOfMeasure Ruble = new UnitOfMeasure(Gender.Masculine, "рубль", "рубля", "рублей");
-        public static readonly UnitOfMeasure Kopek = new UnitOfMeasure(Gender.Feminine, "копейка", "копейки", "копеек");
-
-        #endregion
     }
 }

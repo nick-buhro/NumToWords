@@ -6,20 +6,32 @@ namespace NickBuhro.NumToWords.Tests.Russian
     [TestClass]
     public sealed partial class ToRussianWordsConverterTests
     {
+        [TestMethod]
+        public void RubleKopekTest()
+        {
+            var number = 123.45M;
+            var expected = "сто двадцать три рубля сорок пять копеек";
+
+            var actual = RussianConverter.Format(number);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        #region Helpers
+
         private void MasculineNumberTestHelper(long number, string expected)
         {
-            var c = new ToRussianWordsConverter();
-
-            var actual = c.ToWords(number, Gender.Masculine);
+            var actual = RussianConverter.Format(number, Gender.Masculine);
             Assert.AreEqual(expected, actual);
         }
 
         private void RubleNumberTestHelper(long number, string expected)
         {
-            var c = new ToRussianWordsConverter();
-
-            var actual = c.ToWords(number, UnitOfMeasure.Ruble);
+            var actual = RussianConverter.Format(number, UnitOfMeasure.Ruble);
             Assert.AreEqual(expected, actual);
         }
+
+        #endregion
     }
 }
