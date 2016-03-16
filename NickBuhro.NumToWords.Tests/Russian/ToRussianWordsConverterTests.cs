@@ -5,7 +5,7 @@ using NickBuhro.NumToWords.Russian;
 namespace NickBuhro.NumToWords.Tests.Russian
 {
     [TestClass]
-    public class RussianInWordsFormatterTests
+    public class ToRussianWordsConverterTests
     {
         [TestMethod]
         public void Int32FormatTest()

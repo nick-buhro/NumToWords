@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 
 namespace NickBuhro.NumToWords.Russian
@@ -13,19 +11,20 @@ namespace NickBuhro.NumToWords.Russian
     internal struct Algorithm
     {
         private StringBuilder _result;
-
+        
         /// <summary>
-        /// Constants instance. Don't forget to set before invoke Convert method.
+        /// Format integer number with unit of measure to the correct string on russian language.
         /// </summary>
-        public Constants Constants;
-
+        /// <example>
+        /// For arguments (123, UnitOfMeasure.Ruble) method should return "сто двадцать три рубля".
+        /// </example>
         public string Convert(long number, UnitOfMeasure unit)
         {
-            const long e3 = 1000;
-            const long e6 = 1000000;
-            const long e9 = 1000000000;
-            const long e12 = 1000000000000;
-                                   
+            const long e3 = 1000L;
+            const long e6 = 1000000L;
+            const long e9 = 1000000000L;
+            const long e12 = 1000000000000L;
+
             // Check for the min value that can't be represented as long positive value
             if (number == long.MinValue)
                 throw new ArgumentOutOfRangeException(nameof(number));
@@ -41,7 +40,7 @@ namespace NickBuhro.NumToWords.Russian
             }
             else if (number == 0)
             {
-                _result.Append(Constants.Zero); 
+                _result.Append(Constants.Zero);
             }
 
             // Numbers more than 999 billions is not supported
@@ -52,7 +51,7 @@ namespace NickBuhro.NumToWords.Russian
             if (number >= e9)
             {
                 var value = number / e9;
-                Append((int)value, UnitOfMeasure.Е9);
+                Append((int)value, Constants.Е9Unit);
                 number = number % e9;
             }
 
@@ -60,7 +59,7 @@ namespace NickBuhro.NumToWords.Russian
             if (number >= e6)
             {
                 var value = number / e6;
-                Append((int)value, UnitOfMeasure.Е6);
+                Append((int)value, Constants.Е6Unit);
                 number = number % e6;
             }
 
@@ -68,7 +67,7 @@ namespace NickBuhro.NumToWords.Russian
             if (number >= e3)
             {
                 var value = number / e3;
-                Append((int)value, UnitOfMeasure.Е3);
+                Append((int)value, Constants.Е3Unit);
                 number = number % e3;
             }
 
@@ -112,13 +111,17 @@ namespace NickBuhro.NumToWords.Russian
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
+            // Write hundreds
+
             if (value >= 100)
             {
                 var qty = value / 100;
                 value = value % 100;
                 _result.Append(' ');
-                _result.Append(Constants.Hundreds[qty]);                
+                _result.Append(Constants.Hundreds[qty]);
             }
+
+            // Write dozens
 
             if (value >= 20)
             {
@@ -135,6 +138,8 @@ namespace NickBuhro.NumToWords.Russian
                 return;
             }
 
+            // Write digit
+
             if (value > 0)
             {
                 _result.Append(' ');
@@ -142,6 +147,11 @@ namespace NickBuhro.NumToWords.Russian
             }
         }
 
+        /// <summary>
+        /// Append unit of measure in the correct form.
+        /// </summary>
+        /// <param name="form">The last digit of the number. For number 123 it should be 3.</param>
+        /// <param name="unit">Unit of measure for writing.</param>
         private void AppendUnitOfMeasure(int form, UnitOfMeasure unit)
         {
             Debug.Assert(_result != null);
@@ -151,7 +161,7 @@ namespace NickBuhro.NumToWords.Russian
             if (form >= 5)
             {
                 _result.Append(' ');
-                _result.Append(unit.Form5);                    
+                _result.Append(unit.Form5);
             }
             else if (form >= 2)
             {
@@ -163,7 +173,7 @@ namespace NickBuhro.NumToWords.Russian
                 _result.Append(' ');
                 _result.Append(unit.Form1);
             }
-            else
+            else    // 0 - should use form 5
             {
                 _result.Append(' ');
                 _result.Append(unit.Form5);
