@@ -8,7 +8,7 @@
   "requireLicenseAcceptance": false,
   "projectUrl": "https://github.com/nick-buhro/NumToWords",
   "licenseUrl": "https://raw.githubusercontent.com/nick-buhro/NumToWords/master/LICENSE",
-
+ 
   "frameworks": {
     "net20": { },
     "net35-client": { },

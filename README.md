@@ -1,4 +1,4 @@
-# NickBuhro.NumToWords
+﻿# NickBuhro.NumToWords
 
 C# library for converting numbers to words.
 
@@ -19,28 +19,34 @@ Supported languages:
 ## Usage
 
 ``` C#
+
 // Number formatting
 Console.WriteLine(
-    RussianConverter.Format(12));						// Result is "����������"
+    RussianConverter.Format(12));
+// Output: "двенадцать"
 
 // Formatting number with unit of measure
 Console.WriteLine(
-	RussianConverter.Format(12, UnitOfMeasure.Ruble));	// Result is "���������� ������"
+	RussianConverter.Format(12, UnitOfMeasure.Ruble));
+// Output: "двенадцать рублей"
 
 // Formatting number with custom unit of measure
-var unit = new UnitOfMeasure(Gender.Masculine, "����", "�����", "������");
+var unit = new UnitOfMeasure(Gender.Masculine, "литр", "литра", "литров");
 Console.WriteLine(
-	RussianConverter.Format(12, unit));					// Result is "���������� ������"
+	RussianConverter.Format(12, unit));
+// Output: "двенадцать литров"
 
 // Formatting currency
 Console.WriteLine(
-	RussianConverter.FormatCurrency(12.01));			// Result is "���������� ������ ���� �������"
+	RussianConverter.FormatCurrency(12.01));
+// Output: "двенадцать рублей одна копейка"
 
 // Formatting currency in dollars
-var dollarUnit = new UnitOfMeasure(Gender.Masculine, "������", "�������", "��������");
-var centUnit = new UnitOfMeasure(Gender.Masculine, "����", "�����", "������");
+var dollarUnit = new UnitOfMeasure(Gender.Masculine, "доллар", "доллара", "долларов");
+var centUnit = new UnitOfMeasure(Gender.Masculine, "цент", "цента", "центов");
 Console.WriteLine(
-	RussianConverter.FormatCurrency(12.01, dollarUnit, centUnit));	// Result is "���������� �������� ���� ����"
+	RussianConverter.FormatCurrency(12.01, dollarUnit, centUnit));	
+// Output: "двенадцать долларов один цент"
 ```
 
 ## Compatibility
