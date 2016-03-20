@@ -10,7 +10,7 @@ This library can format:
 
 * Number
 * Number with unit of measure (you can specify your own unit of measure, for example *kilogram*)
-* Currency amount (for example one dollar fifty five cents)
+* Currency amount (for example *one dollar fifty five cents*)
 
 Supported languages:
 
@@ -21,26 +21,26 @@ Supported languages:
 ``` C#
 // Number formatting
 Console.WriteLine(
-    RussianConverter.Format(12));						// Result is "двенадцать"
+    RussianConverter.Format(12));						// Result is "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 
 // Formatting number with unit of measure
 Console.WriteLine(
-	RussianConverter.Format(12, UnitOfMeasure.Ruble));	// Result is "двенадцать рублей"
+	RussianConverter.Format(12, UnitOfMeasure.Ruble));	// Result is "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
 
 // Formatting number with custom unit of measure
-var unit = new UnitOfMeasure(Gender.Masculine, "литр", "литра", "литров");
+var unit = new UnitOfMeasure(Gender.Masculine, "пїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅ");
 Console.WriteLine(
-	RussianConverter.Format(12, unit));					// Result is "нвенадцать литров"
+	RussianConverter.Format(12, unit));					// Result is "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
 
 // Formatting currency
 Console.WriteLine(
-	RussianConverter.FormatCurrency(12.01));			// Result is "нвенадцать рублей одна копейка"
+	RussianConverter.FormatCurrency(12.01));			// Result is "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 
 // Formatting currency in dollars
-var dollarUnit = new UnitOfMeasure(Gender.Masculine, "доллар", "доллара", "долларов");
-var centUnit = new UnitOfMeasure(Gender.Masculine, "цент", "цента", "центов");
+var dollarUnit = new UnitOfMeasure(Gender.Masculine, "пїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+var centUnit = new UnitOfMeasure(Gender.Masculine, "пїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅ");
 Console.WriteLine(
-	RussianConverter.FormatCurrency(12.01, dollarUnit, centUnit));	// Result is "нвенадцать долларов один цент"
+	RussianConverter.FormatCurrency(12.01, dollarUnit, centUnit));	// Result is "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"
 ```
 
 ## Compatibility
