@@ -1,7 +1,8 @@
 ﻿{
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "title": "Numbers to Words",
   "description": "Library for converting numbers to words.",
+  "summary": "Supported only Russian language.",
   "authors": [ "Nicholas Buhro" ],
   "tags": [ "in-words", "russian", "formatting", "currency" ],
   "copyright": "Copyright (c) Nicholas Buhro 2016",
