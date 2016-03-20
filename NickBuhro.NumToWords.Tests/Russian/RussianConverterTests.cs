@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NickBuhro.NumToWords.Russian;
+﻿using NickBuhro.NumToWords.Russian;
+using Xunit;
 
 namespace NickBuhro.NumToWords.Tests.Russian
 {
-    [TestClass]
     public sealed partial class RussianConverterTests
     {
-        [TestMethod]
+        [Fact]
         public void RubleKopekTest()
         {
             var number = 123.45M;
@@ -14,7 +13,7 @@ namespace NickBuhro.NumToWords.Tests.Russian
 
             var actual = RussianConverter.FormatCurrency(number);
 
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
 
@@ -23,15 +22,16 @@ namespace NickBuhro.NumToWords.Tests.Russian
         private void MasculineNumberTestHelper(long number, string expected)
         {
             var actual = RussianConverter.Format(number);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
         private void RubleNumberTestHelper(long number, string expected)
         {
             var actual = RussianConverter.Format(number, UnitOfMeasure.Ruble);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
         #endregion
     }
 }
+
