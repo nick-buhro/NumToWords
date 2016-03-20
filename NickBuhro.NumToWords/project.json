@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0",
+  "title": "Numbers to Words",
+  "description": "Library for converting numbers to words.",
+  "summary": "Supported only Russian language.",
+  "authors": [ "Nicholas Buhro" ],
+  "tags": [ "in-words", "russian", "formatting", "currency" ],
+  "copyright": "Copyright (c) Nicholas Buhro 2016",
+  "requireLicenseAcceptance": false,
+  "projectUrl": "https://github.com/nick-buhro/NumToWords",
+  "licenseUrl": "https://raw.githubusercontent.com/nick-buhro/NumToWords/master/LICENSE",
+ 
+  "frameworks": {
+    "net20": { },
+    "net35-client": { },
+    "net40-client": { },
+    "net45": { },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516"
+      }
+    }
+  }
+}
