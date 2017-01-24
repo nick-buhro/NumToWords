@@ -1,16 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup Label="Configuration">
+    <DocumentationFile>bin\Release\netstandard1.4\NickBuhro.NumToWords.xml</DocumentationFile>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <OutputType>library</OutputType>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <PackageId>NickBuhro.NumToWords</PackageId>
+    <PackageTitle>Numbers to Words</PackageTitle>
+    <PackageVersion>1.0.1-beta</PackageVersion>
+    <Authors>Nicholas Buhro</Authors>
+    <Description>Library for converting numbers to words. Supported only Russian language.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Repackaging for .NET Standard 1.4.</PackageReleaseNotes>
+    <Copyright>Copyright (c) 2016 Nicholas Buhro.</Copyright>
+    <PackageTags>in-words russian formatting currency</PackageTags>
+    <PackageProjectUrl>https://github.com/nick-buhro/NumToWords</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/nick-buhro/NumToWords/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="**\*.cs" />
     <EmbeddedResource Include="**\*.resx" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="1.6" />
   </ItemGroup>
-
 </Project>
