@@ -65,7 +65,7 @@ install:
 build_script:
   - dotnet --info
   - dotnet restore
-  - dotnet msbuild NickBuhro.NumToWords.sln /t:build /p:%configuration%
+  - dotnet msbuild NickBuhro.NumToWords.sln /t:build /p:Configuration=%CONFIGURATION%
 
 # scripts to run after build
 #after_build:
