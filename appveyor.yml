@@ -44,12 +44,13 @@ configuration: Release
 #  - Debug
 #  - Release
 
-environment:
-  CLI_VERSION: Latest
+#environment:
+#  CLI_VERSION: Latest
 
 install:
   # .NET Core SDK binaries
-  - ps: $url = "https://dotnetcli.blob.core.windows.net/dotnet/preview/Binaries/$($env:CLI_VERSION)/dotnet-dev-win-x64.$($env:CLI_VERSION.ToLower()).zip"
+  #- ps: $url = "https://dotnetcli.blob.core.windows.net/dotnet/preview/Binaries/$($env:CLI_VERSION)/dotnet-dev-win-x64.$($env:CLI_VERSION.ToLower()).zip"
+  - ps: $url = "https://go.microsoft.com/fwlink/?linkid=837977"
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
   - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
   - ps: $tempFile = [System.IO.Path]::GetTempFileName()
