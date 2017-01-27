@@ -45,7 +45,7 @@ configuration: Release
 #  - Release
 
 environment:
-  - CLI_VERSION: Latest
+  CLI_VERSION: Latest
 
 install:
   # .NET Core SDK binaries
