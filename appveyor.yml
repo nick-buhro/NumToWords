@@ -65,7 +65,7 @@ install:
 build_script:
   - dotnet --info
   - dotnet restore
-  - nuget restore ".\NickBuhro.NumToWords.Tests.NetFramework\packages.config"
+  - nuget restore
   - dotnet msbuild NickBuhro.NumToWords.sln /t:build /p:Configuration=%CONFIGURATION%
 
 # scripts to run after build
