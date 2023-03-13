@@ -51,12 +51,4 @@ Console.WriteLine(
 
 ## Compatibility
 
-The library uses no references except for `System` - it has no external dependencies.
-It is cross compiled to:
-
-* .NET Framework 2.0 
-* .NET Framework 3.5 Client Profile
-* .NET Framework 4.0 Client Profile
-* .NET Framework 4.5
-* .NET Platform 5.4
-
+The library is build for .NET Standard 2.0 and don't have other dependencies.
