@@ -81,7 +81,8 @@ namespace NickBuhro.NumToWords.Russian
             }
             else
             {
-                AppendUnitOfMeasure(5, unit);
+                _result.Append(' ');
+                _result.Append(unit.GetForm(5));
             }
 
             // Finilize result
@@ -93,14 +94,15 @@ namespace NickBuhro.NumToWords.Russian
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="unit">Unit of measure.</param>
-        private void Append(int value, UnitOfMeasure unit)
+        private void Append(long value, UnitOfMeasure unit)
         {
             Debug.Assert(_result != null);
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
             AppendNumber(value, unit.Gender);
-            AppendUnitOfMeasure(value % 100, unit);
+            _result.Append(' ');
+            _result.Append(unit.GetForm(value));            
         }
 
         /// <summary>
@@ -108,7 +110,7 @@ namespace NickBuhro.NumToWords.Russian
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="gender">Gender for the correct form of result number.</param>
-        private void AppendNumber(int value, Gender gender)
+        private void AppendNumber(long value, Gender gender)
         {
             Debug.Assert(_result != null);
             Debug.Assert(value > 0);
@@ -147,44 +149,6 @@ namespace NickBuhro.NumToWords.Russian
             {
                 _result.Append(' ');
                 _result.Append(Constants.Digits[value][(int)gender]);
-            }
-        }
-
-        /// <summary>
-        /// Append unit of measure in the correct form.
-        /// </summary>
-        /// <param name="form">The last 2 digits of the number. For number 123 it should be 23.</param>
-        /// <param name="unit">Unit of measure for writing.</param>
-        private void AppendUnitOfMeasure(int form, UnitOfMeasure unit)
-        {
-            Debug.Assert(_result != null);
-            Debug.Assert(form >= 0);
-            Debug.Assert(form < 100);
-
-            if (form > 20)
-            {
-                form = form%10;
-            }
-            
-            if (form >= 5)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form5);
-            }
-            else if (form >= 2)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form2);
-            }
-            else if (form == 1)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form1);
-            }
-            else    // 0 - should use form 5
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form5);
             }
         }
     }
