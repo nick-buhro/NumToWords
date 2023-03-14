@@ -53,25 +53,22 @@ namespace NickBuhro.NumToWords.Russian
             // Write billions
             if (number >= E9)
             {
-                var value = number / E9;
-                Append((int)value, Constants.Е9Unit);
-                number = number % E9;
+                var value = Math.DivRem(number, E9, out number);
+                Append((int)value, Constants.Е9Unit);                
             }
 
             // Write millions
             if (number >= E6)
             {
-                var value = number / E6;
+                var value = Math.DivRem(number, E6, out number);
                 Append((int)value, Constants.Е6Unit);
-                number = number % E6;
             }
 
             // Write thouthands
             if (number >= E3)
             {
-                var value = number / E3;
+                var value = Math.DivRem(number, E3, out number);
                 Append((int)value, Constants.Е3Unit);
-                number = number % E3;
             }
 
             // Write hundreds

@@ -7,14 +7,7 @@ namespace NickBuhro.NumToWords.Russian
     /// Convert numbers to russian words.
     /// </summary>
     public static class RussianConverter
-    {
-        private static readonly UnitOfMeasure[] ЕmptyUnitOfMeasures =
-        {
-            new UnitOfMeasure(Gender.Masculine, null, null, null),
-            new UnitOfMeasure(Gender.Feminine, null, null, null),
-            new UnitOfMeasure(Gender.Neuter, null, null, null),
-        };
-
+    {        
         /// <summary>
         /// Convert number to words on russian language (without unit of measure).
         /// </summary>
@@ -29,11 +22,7 @@ namespace NickBuhro.NumToWords.Russian
         /// <returns>Number in words on russian language.</returns>
         public static string Format(long number, Gender gender = Gender.Masculine)
         {
-            Debug.Assert((int)Gender.Masculine == 0);
-            Debug.Assert((int)Gender.Feminine == 1);
-            Debug.Assert((int)Gender.Neuter == 2);
-
-            return Format(number, ЕmptyUnitOfMeasures[(int) gender]);
+            return Format(number, new UnitOfMeasure(gender, null, null, null));            
         }
 
         /// <summary>
@@ -50,8 +39,7 @@ namespace NickBuhro.NumToWords.Russian
         /// <returns>Number in words on russian language with unit of measure.</returns>
         public static string Format(long number, UnitOfMeasure unit)
         {
-            return new Algorithm()
-                .Convert(number, unit);
+            return new Algorithm().Convert(number, unit);
         }
 
         /// <summary>
