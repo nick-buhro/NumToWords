@@ -12,7 +12,14 @@
 		<PackageProjectUrl>https://github.com/nick-buhro/NumToWords</PackageProjectUrl>				
 		<PackageReleaseNotes> Add UnitOfMeasure.GetForm(long) method, fix bug with decimal currencies, repackage for .NET Standard 2.0 and other small optimizations. </PackageReleaseNotes>    
 		<PackageTags>in-words russian formatting currency</PackageTags>    		
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>    		
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		
-	</PropertyGroup>  
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>  
 </Project>
