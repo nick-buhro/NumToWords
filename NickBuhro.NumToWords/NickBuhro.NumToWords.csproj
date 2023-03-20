@@ -1,20 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    
-	  <TargetFramework>netstandard2.0</TargetFramework>
-	<ImplicitUsings>disable</ImplicitUsings>
-	  
-    <PackageId>NickBuhro.NumToWords</PackageId>
-    <PackageTitle>Numbers to Words</PackageTitle>
-    <PackageVersion>1.0.2-beta</PackageVersion>
-    <Authors>Nicholas Buhro</Authors>
-    <Description>Library for converting numbers to words. Supported only Russian language.</Description>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Repackaging for .NET Standard 2.0.</PackageReleaseNotes>
-    <Copyright>Copyright (c) 2016 Nicholas Buhro.</Copyright>
-    <PackageTags>in-words russian formatting currency</PackageTags>
-    <PackageProjectUrl>https://github.com/nick-buhro/NumToWords</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/nick-buhro/NumToWords/master/LICENSE</PackageLicenseUrl>
-	  
-  </PropertyGroup>  
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		
+		<PackageId>NickBuhro.NumToWords</PackageId>
+		<Title>Numbers to Words</Title>
+		<Version>1.1.3</Version>
+		<Authors>Nicholas Buhro</Authors>				
+		<Description>Library for converting numbers to words in Russian language.</Description>				
+		<Copyright>Copyright (c) 2016 Nicholas Buhro</Copyright>
+		<PackageProjectUrl>https://github.com/nick-buhro/NumToWords</PackageProjectUrl>				
+		<PackageReleaseNotes> Add UnitOfMeasure.GetForm(long) method, fix bug with decimal currencies, repackage for .NET Standard 2.0 and other small optimizations. </PackageReleaseNotes>    
+		<PackageTags>in-words russian formatting currency</PackageTags>    		
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		
+	</PropertyGroup>  
 </Project>
