@@ -16,6 +16,17 @@ namespace NickBuhro.NumToWords.Tests.Russian
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void RubleKopekTest2()
+        {
+            var number = 1.99M;
+            var expected = "один рубль девяносто девять копеек";
+
+            var actual = RussianConverter.FormatCurrency(number);
+
+            Assert.Equal(expected, actual);
+        }
+
 
         #region Helpers
 

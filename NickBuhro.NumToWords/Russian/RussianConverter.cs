@@ -56,43 +56,20 @@ namespace NickBuhro.NumToWords.Russian
             UnitOfMeasure decimalUnit = null, 
             int decimalDigitCount = 2)
         {
-            // Check arguments
+            if (decimalDigitCount < 0)
+                throw new ArgumentOutOfRangeException(nameof(decimalDigitCount), $"Negative decimal digits not supported.");
 
-            if ((decimalDigitCount < 0) || (decimalDigitCount > 6))
-                throw new ArgumentOutOfRangeException(
-                    nameof(decimalDigitCount),
-                    $"Value {decimalDigitCount} is invalid. Supported only values between 0 and 6.");
-
-            if ((number > Algorithm.MaxValue) || (number < -Algorithm.MaxValue))
-                throw new ArgumentOutOfRangeException(
-                    nameof(number),
-                    $"Value {number} is invalid. Supported only values between -{Algorithm.MaxValue} and {Algorithm.MaxValue}.");
-            
-            // Find number parts - integer and decimal
-
-            var integerPart = Math.Round(number, 0);
-
-            number = number - integerPart;
-            for (var i = 0; i < decimalDigitCount; i++)
+            var integerNumber = (long)number;
+            var result = Format(integerNumber, integerUnit ?? UnitOfMeasure.Ruble);
+            if (decimalDigitCount > 0)
             {
-                number *= 10;
+                var decimalNumber = number - integerNumber;
+                for (var i = 0; i < decimalDigitCount; i++)
+                    decimalNumber *= 10;                
+                result = string.Concat(result, " ", Format((long)decimalNumber, decimalUnit ?? UnitOfMeasure.Kopek));
             }
 
-            var decimalPart = Math.Round(number, 0);
-            if (number != decimalPart)
-                throw new FormatException($"Lack of precision: number should have only {decimalDigitCount} decimal digits.");
-
-            // Set default values
-
-            if (integerUnit == null) integerUnit = UnitOfMeasure.Ruble;
-            if (decimalUnit == null) decimalUnit = UnitOfMeasure.Kopek;
-
-            // Format and return
-
-            return string.Concat(
-                Format((long) integerPart, integerUnit),
-                " ",
-                Format((long) decimalPart, decimalUnit));
+            return result;
         }
     }
 }
