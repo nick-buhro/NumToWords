@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace NickBuhro.NumToWords.Russian
         public const long MaxValue = E12 - 1;
 
 
-        private StringBuilder _result;
+        private List<string> _words;
         
         /// <summary>
         /// Format integer number with unit of measure to the correct string on russian language.
@@ -32,18 +33,18 @@ namespace NickBuhro.NumToWords.Russian
             if (number == long.MinValue)
                 throw new ArgumentOutOfRangeException(nameof(number));
 
-            _result = new StringBuilder();
+            _words = new List<string>();
 
             // Check for negative number
             if (number < 0)
             {
                 //_result.Append(' ');
-                _result.Append(Constants.Minus);
+                _words.Add(Constants.Minus);
                 number = -number;
             }
             else if (number == 0)
             {
-                _result.Append(Constants.Zero);
+                _words.Add(Constants.Zero);
             }
 
             // Numbers more than 999 billions is not supported
@@ -78,74 +79,67 @@ namespace NickBuhro.NumToWords.Russian
             }
             else
             {
-                _result.Append(' ');
-                _result.Append(unit.GetForm(5));
+                var unitForm = unit.GetForm(5);
+                if (!string.IsNullOrEmpty(unitForm))
+                    _words.Add(unitForm);
             }
 
             // Finilize result
-            return _result.ToString().Trim();
+            return string.Join(" ", _words);
         }
 
         /// <summary>
-        /// Append 3-digit part (with unit of measure) to the StringBuilder.
+        /// Append 3-digit part (with unit of measure) to the result.
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="unit">Unit of measure.</param>
         private void Append(long value, UnitOfMeasure unit)
         {
-            Debug.Assert(_result != null);
+            Debug.Assert(_words != null);
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
             AppendNumber(value, unit.Gender);
-            _result.Append(' ');
-            _result.Append(unit.GetForm(value));            
+            var unitForm = unit.GetForm(value);
+            if (!string.IsNullOrEmpty(unitForm))
+                _words.Add(unitForm);
         }
 
         /// <summary>
-        /// Append 3-digit part (without unit of measure) to the StringBuilder.
+        /// Append 3-digit part (without unit of measure) to the result.
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="gender">Gender for the correct form of result number.</param>
         private void AppendNumber(long value, Gender gender)
         {
-            Debug.Assert(_result != null);
+            Debug.Assert(_words != null);
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
             // Write hundreds
-
             if (value >= 100)
             {
-                var qty = value / 100;
-                value = value % 100;
-                _result.Append(' ');
-                _result.Append(Constants.Hundreds[qty]);
+                var qty = Math.DivRem(value, 100, out value);                
+                _words.Add(Constants.Hundreds[qty]);
             }
 
             // Write dozens
-
             if (value >= 20)
             {
-                var qty = value / 10;
-                value = value % 10;
-                _result.Append(' ');
-                _result.Append(Constants.Dozens[qty]);
+                var qty = Math.DivRem(value, 10, out value);
+                _words.Add(Constants.Dozens[qty]);
             }
             else if (value >= 10)
             {
-                var qty = value - 10;
-                _result.Append(' ');
-                _result.Append(Constants.Tens[qty]);
+                var qty = value - 10;                
+                _words.Add(Constants.Tens[qty]);
                 return;
             }
 
             // Write digit
-
             if (value > 0)
             {
-                _result.Append(' ');
-                _result.Append(Constants.Digits[value][(int)gender]);
+                _words.Add(Constants.Digits[value][(int)gender]);
             }
         }
     }
