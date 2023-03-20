@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace NickBuhro.NumToWords.Russian
         public const long MaxValue = E12 - 1;
 
 
-        private StringBuilder _result;
+        private List<string> _words;
         
         /// <summary>
         /// Format integer number with unit of measure to the correct string on russian language.
@@ -32,18 +33,18 @@ namespace NickBuhro.NumToWords.Russian
             if (number == long.MinValue)
                 throw new ArgumentOutOfRangeException(nameof(number));
 
-            _result = new StringBuilder();
+            _words = new List<string>();
 
             // Check for negative number
             if (number < 0)
             {
                 //_result.Append(' ');
-                _result.Append(Constants.Minus);
+                _words.Add(Constants.Minus);
                 number = -number;
             }
             else if (number == 0)
             {
-                _result.Append(Constants.Zero);
+                _words.Add(Constants.Zero);
             }
 
             // Numbers more than 999 billions is not supported
@@ -53,25 +54,22 @@ namespace NickBuhro.NumToWords.Russian
             // Write billions
             if (number >= E9)
             {
-                var value = number / E9;
-                Append((int)value, Constants.Е9Unit);
-                number = number % E9;
+                var value = Math.DivRem(number, E9, out number);
+                Append((int)value, Constants.Е9Unit);                
             }
 
             // Write millions
             if (number >= E6)
             {
-                var value = number / E6;
+                var value = Math.DivRem(number, E6, out number);
                 Append((int)value, Constants.Е6Unit);
-                number = number % E6;
             }
 
             // Write thouthands
             if (number >= E3)
             {
-                var value = number / E3;
+                var value = Math.DivRem(number, E3, out number);
                 Append((int)value, Constants.Е3Unit);
-                number = number % E3;
             }
 
             // Write hundreds
@@ -81,110 +79,67 @@ namespace NickBuhro.NumToWords.Russian
             }
             else
             {
-                AppendUnitOfMeasure(5, unit);
+                var unitForm = unit.GetForm(5);
+                if (!string.IsNullOrEmpty(unitForm))
+                    _words.Add(unitForm);
             }
 
             // Finilize result
-            return _result.ToString().Trim();
+            return string.Join(" ", _words);
         }
 
         /// <summary>
-        /// Append 3-digit part (with unit of measure) to the StringBuilder.
+        /// Append 3-digit part (with unit of measure) to the result.
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="unit">Unit of measure.</param>
-        private void Append(int value, UnitOfMeasure unit)
+        private void Append(long value, UnitOfMeasure unit)
         {
-            Debug.Assert(_result != null);
+            Debug.Assert(_words != null);
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
             AppendNumber(value, unit.Gender);
-            AppendUnitOfMeasure(value % 100, unit);
+            var unitForm = unit.GetForm(value);
+            if (!string.IsNullOrEmpty(unitForm))
+                _words.Add(unitForm);
         }
 
         /// <summary>
-        /// Append 3-digit part (without unit of measure) to the StringBuilder.
+        /// Append 3-digit part (without unit of measure) to the result.
         /// </summary>
         /// <param name="value">Number - integer between 1 and 999.</param>
         /// <param name="gender">Gender for the correct form of result number.</param>
-        private void AppendNumber(int value, Gender gender)
+        private void AppendNumber(long value, Gender gender)
         {
-            Debug.Assert(_result != null);
+            Debug.Assert(_words != null);
             Debug.Assert(value > 0);
             Debug.Assert(value < 1000);
 
             // Write hundreds
-
             if (value >= 100)
             {
-                var qty = value / 100;
-                value = value % 100;
-                _result.Append(' ');
-                _result.Append(Constants.Hundreds[qty]);
+                var qty = Math.DivRem(value, 100, out value);                
+                _words.Add(Constants.Hundreds[qty]);
             }
 
             // Write dozens
-
             if (value >= 20)
             {
-                var qty = value / 10;
-                value = value % 10;
-                _result.Append(' ');
-                _result.Append(Constants.Dozens[qty]);
+                var qty = Math.DivRem(value, 10, out value);
+                _words.Add(Constants.Dozens[qty]);
             }
             else if (value >= 10)
             {
-                var qty = value - 10;
-                _result.Append(' ');
-                _result.Append(Constants.Tens[qty]);
+                var qty = value - 10;                
+                _words.Add(Constants.Tens[qty]);
                 return;
             }
 
             // Write digit
-
             if (value > 0)
             {
-                _result.Append(' ');
-                _result.Append(Constants.Digits[value][(int)gender]);
-            }
-        }
-
-        /// <summary>
-        /// Append unit of measure in the correct form.
-        /// </summary>
-        /// <param name="form">The last 2 digits of the number. For number 123 it should be 23.</param>
-        /// <param name="unit">Unit of measure for writing.</param>
-        private void AppendUnitOfMeasure(int form, UnitOfMeasure unit)
-        {
-            Debug.Assert(_result != null);
-            Debug.Assert(form >= 0);
-            Debug.Assert(form < 100);
-
-            if (form > 20)
-            {
-                form = form%10;
-            }
-            
-            if (form >= 5)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form5);
-            }
-            else if (form >= 2)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form2);
-            }
-            else if (form == 1)
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form1);
-            }
-            else    // 0 - should use form 5
-            {
-                _result.Append(' ');
-                _result.Append(unit.Form5);
+                _words.Add(Constants.Digits[value][(int)gender]);
             }
         }
     }

@@ -7,14 +7,7 @@ namespace NickBuhro.NumToWords.Russian
     /// Convert numbers to russian words.
     /// </summary>
     public static class RussianConverter
-    {
-        private static readonly UnitOfMeasure[] ЕmptyUnitOfMeasures =
-        {
-            new UnitOfMeasure(Gender.Masculine, null, null, null),
-            new UnitOfMeasure(Gender.Feminine, null, null, null),
-            new UnitOfMeasure(Gender.Neuter, null, null, null),
-        };
-
+    {        
         /// <summary>
         /// Convert number to words on russian language (without unit of measure).
         /// </summary>
@@ -29,11 +22,7 @@ namespace NickBuhro.NumToWords.Russian
         /// <returns>Number in words on russian language.</returns>
         public static string Format(long number, Gender gender = Gender.Masculine)
         {
-            Debug.Assert((int)Gender.Masculine == 0);
-            Debug.Assert((int)Gender.Feminine == 1);
-            Debug.Assert((int)Gender.Neuter == 2);
-
-            return Format(number, ЕmptyUnitOfMeasures[(int) gender]);
+            return Format(number, new UnitOfMeasure(gender, null, null, null));            
         }
 
         /// <summary>
@@ -50,8 +39,7 @@ namespace NickBuhro.NumToWords.Russian
         /// <returns>Number in words on russian language with unit of measure.</returns>
         public static string Format(long number, UnitOfMeasure unit)
         {
-            return new Algorithm()
-                .Convert(number, unit);
+            return new Algorithm().Convert(number, unit);
         }
 
         /// <summary>
@@ -68,43 +56,20 @@ namespace NickBuhro.NumToWords.Russian
             UnitOfMeasure decimalUnit = null, 
             int decimalDigitCount = 2)
         {
-            // Check arguments
+            if (decimalDigitCount < 0)
+                throw new ArgumentOutOfRangeException(nameof(decimalDigitCount), $"Negative decimal digits not supported.");
 
-            if ((decimalDigitCount < 0) || (decimalDigitCount > 6))
-                throw new ArgumentOutOfRangeException(
-                    nameof(decimalDigitCount),
-                    $"Value {decimalDigitCount} is invalid. Supported only values between 0 and 6.");
-
-            if ((number > Algorithm.MaxValue) || (number < -Algorithm.MaxValue))
-                throw new ArgumentOutOfRangeException(
-                    nameof(number),
-                    $"Value {number} is invalid. Supported only values between -{Algorithm.MaxValue} and {Algorithm.MaxValue}.");
-            
-            // Find number parts - integer and decimal
-
-            var integerPart = Math.Round(number, 0);
-
-            number = number - integerPart;
-            for (var i = 0; i < decimalDigitCount; i++)
+            var integerNumber = (long)number;
+            var result = Format(integerNumber, integerUnit ?? UnitOfMeasure.Ruble);
+            if (decimalDigitCount > 0)
             {
-                number *= 10;
+                var decimalNumber = number - integerNumber;
+                for (var i = 0; i < decimalDigitCount; i++)
+                    decimalNumber *= 10;                
+                result = string.Concat(result, " ", Format((long)decimalNumber, decimalUnit ?? UnitOfMeasure.Kopek));
             }
 
-            var decimalPart = Math.Round(number, 0);
-            if (number != decimalPart)
-                throw new FormatException($"Lack of precision: number should have only {decimalDigitCount} decimal digits.");
-
-            // Set default values
-
-            if (integerUnit == null) integerUnit = UnitOfMeasure.Ruble;
-            if (decimalUnit == null) decimalUnit = UnitOfMeasure.Kopek;
-
-            // Format and return
-
-            return string.Concat(
-                Format((long) integerPart, integerUnit),
-                " ",
-                Format((long) decimalPart, decimalUnit));
+            return result;
         }
     }
 }

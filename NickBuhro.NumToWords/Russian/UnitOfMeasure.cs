@@ -1,4 +1,6 @@
-﻿namespace NickBuhro.NumToWords.Russian
+﻿using System;
+
+namespace NickBuhro.NumToWords.Russian
 {
     /// <summary>
     /// Represents unit of measure for number formatting.
@@ -49,6 +51,36 @@
             Form1 = form1;
             Form2 = form2;
             Form5 = form5;
+        }
+
+        /// <summary>
+        /// Get correct unit of measure form for the specified number. Result DOES NOT include the number specified.
+        /// </summary>        
+        /// <param name="number">Number to determine correct unit of measure form.</param>
+        /// <example>
+        /// `UnitOfMeasure.Ruble.GetForm(123)` call should return "рубля".
+        /// </example>
+        public string GetForm(long number)
+        {
+            if (number < 0)
+                number = Math.Abs(number);
+            
+            if (number >= 100)
+                number %= 100;
+
+            if (number > 20)
+                number %= 10;
+
+            if (number >= 5)
+                return Form5;
+
+            if (number >= 2)
+                return Form2;
+
+            if (number == 1)
+                return Form1;
+                        
+            return Form5;   // 0 - should use form 5
         }
     }
 }
